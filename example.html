@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+    }
+};
+xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=Huatabampo&mode=xml&units=metric&APPID=e114274d8c7da2abf44abd2ad8177fdd", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var city, wind, xmlDoc, txt, icon;
+    xmlDoc = xml.responseXML;
+    txt = "";
+    icon = xmlDoc.getElementsByTagName('weather')[0].getAttribute('icon');
+    temp = xmlDoc.getElementsByTagName('temperature')
+    wind = xmlDoc.getElementsByTagName('wind')
+    city = xmlDoc.getElementsByTagName('city');
+    let rise = new Date(city[0].childNodes[2].getAttribute('rise'));
+    let set = new Date(city[0].childNodes[2].getAttribute('set'));
+    var sunrise = rise.toLocaleTimeString();
+    var sunset = set.toLocaleTimeString();
+    txt = "<h3 style='font-size:32px; font-weight: bold;' class='text-center'>Clima actual para " + city[0].getAttribute('name') + ", " + city[0].getElementsByTagName('country')[0].childNodes[0].nodeValue + "</h3>" //city
+        + "<h3><strong>Clima</strong>: " + xmlDoc.getElementsByTagName('weather')[0].getAttribute('value') + "<img src='http://openweathermap.org/img/w/" + icon + ".png'></h3>"
+        + "<h3><strong>Temperatura</strong>: " + temp[0].getAttribute('value') + "&deg;C</h3>" //temp
+        + "<h3><strong>Temperatura mínima</strong>: " + temp[0].getAttribute('min') + "&deg;C</h3>"//min temp
+        + "<h3><strong>Temperatura máxima</strong>: " + temp[0].getAttribute('max') + "&deg;C</h3>"//max temp
+        + "<h3><strong>Presión</strong>: " + xmlDoc.getElementsByTagName('pressure')[0].getAttribute('value') + " hpa</h3>"//presion
+        + "<h3><strong>Humedad</strong>: " + xmlDoc.getElementsByTagName('humidity')[0].getAttribute('value') + "%</h3>"//humedad
+        + "<h3><strong>Velocidad del viento</strong>: " + xmlDoc.getElementsByTagName('wind')[0].childNodes[0].getAttribute('value') + " m/s</h3>" //wind speed
+        + "<h3><strong>Dirección del viento</strong>: " + xmlDoc.getElementsByTagName('wind')[0].childNodes[2].getAttribute('name') + "</h3>"//wind direction
+        + "<h3><strong>Salida de sol</strong>: " + sunrise + "</h3>"//sunrise
+        + "<h3><strong>Puesta de sol</strong>: " + sunset + "</h3>"//sunset
+        + "<h3><strong>Latitud</strong>: " + city[0].childNodes[0].getAttribute('lat') + "</h3>"//latitud
+        + "<h3><strong>Longitud</strong>: " + city[0].childNodes[0].getAttribute('lon') + "</h3>"//longitud
+        + "<h3><strong>Ultima actualizacion</strong>: " + xmlDoc.getElementsByTagName('lastupdate')[0].getAttribute('value') + "</h3>";//last update
+
+      document.getElementById("demo").innerHTML = txt;
+
+}
+</script>
+
+</body>
+</html>

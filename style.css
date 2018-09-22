@@ -1,0 +1,66 @@
+#rowDiv{
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+input[type="text"]{
+   height: 40px;
+   font-size: 20px;
+}
+
+#format{
+ height: 3em;
+ width: 131px;
+ position: relative;
+ left: 257px;
+}
+
+#submitWeather{
+  position: relative;
+  left: -247px;
+  top: 10px;
+  bottom: 30px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#show{
+  margin: auto;
+  width: 60%;
+  position: relative;
+  left: 27px;
+}
+#errorCit{
+  width: 50px;
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+}
+
+#format-text2{
+  font-size: 28px;
+  font-weight: lighter;
+  margin-bottom:10px;
+  position: relative;
+  left: -117px;
+  color:#4d004d;
+}
+
+#format-text{
+  font-size: 28px;
+  font-weight: lighter;
+  margin-bottom:10px;
+  position: relative;
+  left: -170px;
+  color:#4d004d;
+  
+}
+
+#city{
+  height: 2em;
+  width: 300px;
+  position: relative;
+  left: 257px;
+}
